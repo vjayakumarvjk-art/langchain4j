@@ -1,5 +1,9 @@
 package dev.langchain4j.model.huggingface;
 
+import static dev.langchain4j.internal.ValidationUtils.ensureNotBlank;
+import static dev.langchain4j.spi.ServiceHelper.loadFactories;
+import static java.util.stream.Collectors.toList;
+
 import dev.langchain4j.data.embedding.Embedding;
 import dev.langchain4j.data.segment.TextSegment;
 import dev.langchain4j.model.embedding.DimensionAwareEmbeddingModel;
@@ -8,13 +12,8 @@ import dev.langchain4j.model.huggingface.client.HuggingFaceClient;
 import dev.langchain4j.model.huggingface.spi.HuggingFaceClientFactory;
 import dev.langchain4j.model.huggingface.spi.HuggingFaceEmbeddingModelBuilderFactory;
 import dev.langchain4j.model.output.Response;
-
 import java.time.Duration;
 import java.util.List;
-
-import static dev.langchain4j.internal.ValidationUtils.ensureNotBlank;
-import static dev.langchain4j.spi.ServiceHelper.loadFactories;
-import static java.util.stream.Collectors.toList;
 
 public class HuggingFaceEmbeddingModel extends DimensionAwareEmbeddingModel {
 
@@ -30,7 +29,10 @@ public class HuggingFaceEmbeddingModel extends DimensionAwareEmbeddingModel {
      */
     public HuggingFaceEmbeddingModel(
             String baseUrl, String accessToken, String modelId, Boolean waitForModel, Duration timeout) {
-        ensureNotBlank(accessToken, "%s", "HuggingFace access token must be defined. It can be generated here: https://huggingface.co/settings/tokens");
+        ensureNotBlank(
+                accessToken,
+                "%s",
+                "HuggingFace access token must be defined. It can be generated here: https://huggingface.co/settings/tokens");
         this.waitForModel = waitForModel == null || waitForModel;
         this.baseUrl = baseUrl;
         this.modelId = modelId;
@@ -107,37 +109,74 @@ public class HuggingFaceEmbeddingModel extends DimensionAwareEmbeddingModel {
             // This is public so it can be extended
         }
 
+        /**
+         * Sets the base URL of the Hugging Face Inference API.
+         * Defaults to the standard Hugging Face API endpoint.
+         *
+         * @param baseUrl the base URL
+         * @return {@code this}
+         */
         public HuggingFaceEmbeddingModelBuilder baseUrl(String baseUrl) {
             this.baseUrl = baseUrl;
             return this;
         }
 
+        /**
+         * Sets the Hugging Face access token used to authenticate requests.
+         * Tokens can be generated at <a href="https://huggingface.co/settings/tokens">https://huggingface.co/settings/tokens</a>.
+         *
+         * @param accessToken the Hugging Face access token
+         * @return {@code this}
+         */
         public HuggingFaceEmbeddingModelBuilder accessToken(String accessToken) {
             this.accessToken = accessToken;
             return this;
         }
 
+        /**
+         * Sets the Hugging Face model ID to use for embeddings,
+         * e.g. {@code "sentence-transformers/all-MiniLM-L6-v2"}.
+         *
+         * @param modelId the model ID
+         * @return {@code this}
+         */
         public HuggingFaceEmbeddingModelBuilder modelId(String modelId) {
             this.modelId = modelId;
             return this;
         }
 
+        /**
+         * Sets whether to wait for the model to load if it is not ready yet.
+         * Defaults to {@code true}.
+         *
+         * @param waitForModel {@code true} to wait for the model to be ready
+         * @return {@code this}
+         */
         public HuggingFaceEmbeddingModelBuilder waitForModel(Boolean waitForModel) {
             this.waitForModel = waitForModel;
             return this;
         }
 
+        /**
+         * Sets the HTTP request timeout. Defaults to 15 seconds.
+         *
+         * @param timeout the request timeout
+         * @return {@code this}
+         */
         public HuggingFaceEmbeddingModelBuilder timeout(Duration timeout) {
             this.timeout = timeout;
             return this;
         }
 
         public HuggingFaceEmbeddingModel build() {
-            return new HuggingFaceEmbeddingModel(this.baseUrl, this.accessToken, this.modelId, this.waitForModel, this.timeout);
+            return new HuggingFaceEmbeddingModel(
+                    this.baseUrl, this.accessToken, this.modelId, this.waitForModel, this.timeout);
         }
 
         public String toString() {
-            return "HuggingFaceEmbeddingModel.HuggingFaceEmbeddingModelBuilder(baseUrl=" + this.baseUrl + ", accessToken=" + this.accessToken + ", modelId=" + this.modelId + ", waitForModel=" + this.waitForModel + ", timeout=" + this.timeout + ")";
+            return "HuggingFaceEmbeddingModel.HuggingFaceEmbeddingModelBuilder(baseUrl=" + this.baseUrl
+                    + ", accessToken=" + this.accessToken + ", modelId=" + this.modelId + ", waitForModel="
+                    + this.waitForModel + ", timeout=" + this.timeout + ")";
         }
     }
 }

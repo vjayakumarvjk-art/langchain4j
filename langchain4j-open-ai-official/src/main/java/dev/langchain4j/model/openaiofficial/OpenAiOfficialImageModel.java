@@ -190,16 +190,34 @@ public class OpenAiOfficialImageModel implements ImageModel {
         private Long outputCompression;
         private ImageGenerateParams.Moderation moderation;
 
+        /**
+         * Sets the base URL of the OpenAI-compatible API. Defaults to {@code https://api.openai.com/v1}.
+         *
+         * @param baseUrl the base URL
+         * @return {@code this}
+         */
         public Builder baseUrl(String baseUrl) {
             this.baseUrl = baseUrl;
             return this;
         }
 
+        /**
+         * Sets the OpenAI API key used to authenticate requests.
+         *
+         * @param apiKey the API key
+         * @return {@code this}
+         */
         public Builder apiKey(String apiKey) {
             this.apiKey = apiKey;
             return this;
         }
 
+        /**
+         * Sets the {@link Credential} used to authenticate requests (alternative to {@link #apiKey(String)}).
+         *
+         * @param credential the credential
+         * @return {@code this}
+         */
         public Builder credential(Credential credential) {
             this.credential = credential;
             return this;
@@ -214,16 +232,34 @@ public class OpenAiOfficialImageModel implements ImageModel {
             return this;
         }
 
+        /**
+         * Sets the Microsoft Foundry deployment name used when connecting to Azure OpenAI or Microsoft Foundry.
+         *
+         * @param microsoftFoundryDeploymentName the deployment name
+         * @return {@code this}
+         */
         public Builder microsoftFoundryDeploymentName(String microsoftFoundryDeploymentName) {
             this.microsoftFoundryDeploymentName = microsoftFoundryDeploymentName;
             return this;
         }
 
+        /**
+         * Sets the Azure OpenAI service API version when connecting to Azure OpenAI.
+         *
+         * @param azureOpenAIServiceVersion the Azure OpenAI service version
+         * @return {@code this}
+         */
         public Builder azureOpenAIServiceVersion(AzureOpenAIServiceVersion azureOpenAIServiceVersion) {
             this.azureOpenAIServiceVersion = azureOpenAIServiceVersion;
             return this;
         }
 
+        /**
+         * Sets the OpenAI organization ID sent with each request.
+         *
+         * @param organizationId the organization ID
+         * @return {@code this}
+         */
         public Builder organizationId(String organizationId) {
             this.organizationId = organizationId;
             return this;
@@ -238,106 +274,233 @@ public class OpenAiOfficialImageModel implements ImageModel {
             return this;
         }
 
+        /**
+         * Configures the client to use Microsoft Foundry as the API provider.
+         *
+         * @param isMicrosoftFoundry {@code true} to use Microsoft Foundry
+         * @return {@code this}
+         */
         public Builder isMicrosoftFoundry(boolean isMicrosoftFoundry) {
             this.isMicrosoftFoundry = isMicrosoftFoundry;
             return this;
         }
 
+        /**
+         * Configures the client to use GitHub Models as the API provider.
+         *
+         * @param isGitHubModels {@code true} to use GitHub Models
+         * @return {@code this}
+         */
         public Builder isGitHubModels(boolean isGitHubModels) {
             this.isGitHubModels = isGitHubModels;
             return this;
         }
 
+        /**
+         * Sets a pre-configured {@link OpenAIClient} to use directly, bypassing all other connection settings.
+         *
+         * @param openAIClient the pre-configured client
+         * @return {@code this}
+         */
         public Builder openAIClient(OpenAIClient openAIClient) {
             this.openAIClient = openAIClient;
             return this;
         }
 
+        /**
+         * Sets the model name, e.g. {@code "dall-e-3"} or {@code "gpt-image-1"}.
+         *
+         * @param modelName the model name
+         * @return {@code this}
+         */
         public Builder modelName(String modelName) {
             this.modelName = modelName;
             return this;
         }
 
+        /**
+         * Sets the model name using a {@link com.openai.models.images.ImageModel} enum constant.
+         *
+         * @param modelName the model name enum value
+         * @return {@code this}
+         */
         public Builder modelName(com.openai.models.images.ImageModel modelName) {
             this.modelName = modelName.toString();
             return this;
         }
 
+        /**
+         * Sets the image size as a string, e.g. {@code "1024x1024"} or {@code "1792x1024"}.
+         *
+         * @param size the image size string
+         * @return {@code this}
+         */
         public Builder size(String size) {
             this.size = ImageGenerateParams.Size.of(size);
             return this;
         }
 
+        /**
+         * Sets the image size using an {@link ImageGenerateParams.Size} enum constant.
+         *
+         * @param size the image size
+         * @return {@code this}
+         */
         public Builder size(ImageGenerateParams.Size size) {
             this.size = size;
             return this;
         }
 
+        /**
+         * Sets the image quality as a string, e.g. {@code "standard"} or {@code "hd"}.
+         *
+         * @param quality the image quality string
+         * @return {@code this}
+         */
         public Builder quality(String quality) {
             this.quality = ImageGenerateParams.Quality.of(quality);
             return this;
         }
 
+        /**
+         * Sets the image quality using an {@link ImageGenerateParams.Quality} enum constant.
+         *
+         * @param quality the image quality
+         * @return {@code this}
+         */
         public Builder quality(ImageGenerateParams.Quality quality) {
             this.quality = quality;
             return this;
         }
 
+        /**
+         * Sets a unique end-user identifier sent to OpenAI to help monitor and detect abuse.
+         *
+         * @param user the end-user identifier
+         * @return {@code this}
+         */
         public Builder user(String user) {
             this.user = user;
             return this;
         }
 
+        /**
+         * Sets the background type as a string, e.g. {@code "transparent"} or {@code "opaque"}.
+         *
+         * @param background the background type string
+         * @return {@code this}
+         */
         public Builder background(String background) {
             this.background = ImageGenerateParams.Background.of(background);
             return this;
         }
 
+        /**
+         * Sets the background type using an {@link ImageGenerateParams.Background} enum constant.
+         *
+         * @param background the background type
+         * @return {@code this}
+         */
         public Builder background(ImageGenerateParams.Background background) {
             this.background = background;
             return this;
         }
 
+        /**
+         * Sets the output format as a string, e.g. {@code "png"}, {@code "webp"}, or {@code "jpeg"}.
+         *
+         * @param outputFormat the output format string
+         * @return {@code this}
+         */
         public Builder outputFormat(String outputFormat) {
             this.outputFormat = ImageGenerateParams.OutputFormat.of(outputFormat);
             return this;
         }
 
+        /**
+         * Sets the output format using an {@link ImageGenerateParams.OutputFormat} enum constant.
+         *
+         * @param outputFormat the output format
+         * @return {@code this}
+         */
         public Builder outputFormat(ImageGenerateParams.OutputFormat outputFormat) {
             this.outputFormat = outputFormat;
             return this;
         }
 
+        /**
+         * Sets the compression level for the output image (0–100).
+         * Only applicable to {@code webp} and {@code jpeg} output formats.
+         *
+         * @param outputCompression the compression level
+         * @return {@code this}
+         */
         public Builder outputCompression(Long outputCompression) {
             this.outputCompression = outputCompression;
             return this;
         }
 
+        /**
+         * Sets the content moderation level as a string, e.g. {@code "low"} or {@code "auto"}.
+         *
+         * @param moderation the moderation level string
+         * @return {@code this}
+         */
         public Builder moderation(String moderation) {
             this.moderation = ImageGenerateParams.Moderation.of(moderation);
             return this;
         }
 
+        /**
+         * Sets the content moderation level using an {@link ImageGenerateParams.Moderation} enum constant.
+         *
+         * @param moderation the moderation level
+         * @return {@code this}
+         */
         public Builder moderation(ImageGenerateParams.Moderation moderation) {
             this.moderation = moderation;
             return this;
         }
 
+        /**
+         * Sets the HTTP request timeout.
+         *
+         * @param timeout the request timeout
+         * @return {@code this}
+         */
         public Builder timeout(Duration timeout) {
             this.timeout = timeout;
             return this;
         }
 
+        /**
+         * Sets the maximum number of retries on transient errors.
+         *
+         * @param maxRetries the maximum number of retries
+         * @return {@code this}
+         */
         public Builder maxRetries(Integer maxRetries) {
             this.maxRetries = maxRetries;
             return this;
         }
 
+        /**
+         * Sets the network proxy used for HTTP connections.
+         *
+         * @param proxy the network proxy
+         * @return {@code this}
+         */
         public Builder proxy(Proxy proxy) {
             this.proxy = proxy;
             return this;
         }
 
+        /**
+         * Sets additional HTTP headers sent with every request.
+         *
+         * @param customHeaders the custom headers map
+         * @return {@code this}
+         */
         public Builder customHeaders(Map<String, String> customHeaders) {
             this.customHeaders = customHeaders;
             return this;

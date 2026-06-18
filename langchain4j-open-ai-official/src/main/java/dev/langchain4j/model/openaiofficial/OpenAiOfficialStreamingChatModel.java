@@ -292,26 +292,56 @@ public class OpenAiOfficialStreamingChatModel extends OpenAiOfficialBaseChatMode
             return this;
         }
 
+        /**
+         * Sets the model name, e.g. {@code "gpt-4o"} or {@code "gpt-4o-mini"}.
+         *
+         * @param modelName the model name
+         * @return {@code this}
+         */
         public Builder modelName(String modelName) {
             this.modelName = modelName;
             return this;
         }
 
+        /**
+         * Sets the model name using a {@link ChatModel} enum constant.
+         *
+         * @param modelName the model name enum value
+         * @return {@code this}
+         */
         public Builder modelName(ChatModel modelName) {
             this.modelName = modelName.toString();
             return this;
         }
 
+        /**
+         * Sets the base URL of the OpenAI-compatible API. Defaults to {@code https://api.openai.com/v1}.
+         *
+         * @param baseUrl the base URL
+         * @return {@code this}
+         */
         public Builder baseUrl(String baseUrl) {
             this.baseUrl = baseUrl;
             return this;
         }
 
+        /**
+         * Sets the OpenAI API key used to authenticate requests.
+         *
+         * @param apiKey the API key
+         * @return {@code this}
+         */
         public Builder apiKey(String apiKey) {
             this.apiKey = apiKey;
             return this;
         }
 
+        /**
+         * Sets the {@link Credential} used to authenticate requests (alternative to {@link #apiKey(String)}).
+         *
+         * @param credential the credential
+         * @return {@code this}
+         */
         public Builder credential(Credential credential) {
             this.credential = credential;
             return this;
@@ -326,16 +356,34 @@ public class OpenAiOfficialStreamingChatModel extends OpenAiOfficialBaseChatMode
             return this;
         }
 
+        /**
+         * Sets the Microsoft Foundry deployment name used when connecting to Azure OpenAI or Microsoft Foundry.
+         *
+         * @param microsoftFoundryDeploymentName the deployment name
+         * @return {@code this}
+         */
         public Builder microsoftFoundryDeploymentName(String microsoftFoundryDeploymentName) {
             this.microsoftFoundryDeploymentName = microsoftFoundryDeploymentName;
             return this;
         }
 
+        /**
+         * Sets the Azure OpenAI service API version when connecting to Azure OpenAI.
+         *
+         * @param azureOpenAIServiceVersion the Azure OpenAI service version
+         * @return {@code this}
+         */
         public Builder azureOpenAIServiceVersion(AzureOpenAIServiceVersion azureOpenAIServiceVersion) {
             this.azureOpenAIServiceVersion = azureOpenAIServiceVersion;
             return this;
         }
 
+        /**
+         * Sets the OpenAI organization ID sent with each request.
+         *
+         * @param organizationId the organization ID
+         * @return {@code this}
+         */
         public Builder organizationId(String organizationId) {
             this.organizationId = organizationId;
             return this;
@@ -350,131 +398,292 @@ public class OpenAiOfficialStreamingChatModel extends OpenAiOfficialBaseChatMode
             return this;
         }
 
+        /**
+         * Configures the client to use Microsoft Foundry as the API provider.
+         *
+         * @param isMicrosoftFoundry {@code true} to use Microsoft Foundry
+         * @return {@code this}
+         */
         public Builder isMicrosoftFoundry(boolean isMicrosoftFoundry) {
             this.isMicrosoftFoundry = isMicrosoftFoundry;
             return this;
         }
 
+        /**
+         * Configures the client to use GitHub Models as the API provider.
+         *
+         * @param isGitHubModels {@code true} to use GitHub Models
+         * @return {@code this}
+         */
         public Builder isGitHubModels(boolean isGitHubModels) {
             this.isGitHubModels = isGitHubModels;
             return this;
         }
 
+        /**
+         * Sets a pre-configured {@link OpenAIClientAsync} to use directly, bypassing all other connection settings.
+         *
+         * @param openAIClientAsync the pre-configured async client
+         * @return {@code this}
+         */
         public Builder openAIClientAsync(OpenAIClientAsync openAIClientAsync) {
             this.openAIClientAsync = openAIClientAsync;
             return this;
         }
 
+        /**
+         * Sets the sampling temperature in the range {@code [0.0, 2.0]}.
+         * Higher values produce more varied output; lower values are more deterministic.
+         *
+         * @param temperature the sampling temperature
+         * @return {@code this}
+         */
         public Builder temperature(Double temperature) {
             this.temperature = temperature;
             return this;
         }
 
+        /**
+         * Sets the nucleus sampling probability threshold in the range {@code (0.0, 1.0]}.
+         *
+         * @param topP the nucleus sampling threshold
+         * @return {@code this}
+         */
         public Builder topP(Double topP) {
             this.topP = topP;
             return this;
         }
 
+        /**
+         * Sets the stop sequences that cause the model to stop generating further tokens.
+         *
+         * @param stop the list of stop sequences
+         * @return {@code this}
+         */
         public Builder stop(List<String> stop) {
             this.stop = stop;
             return this;
         }
 
+        /**
+         * Sets the maximum number of tokens to generate in the response.
+         *
+         * @param maxCompletionTokens the maximum number of completion tokens
+         * @return {@code this}
+         */
         public Builder maxCompletionTokens(Integer maxCompletionTokens) {
             this.maxCompletionTokens = maxCompletionTokens;
             return this;
         }
 
+        /**
+         * Sets the presence penalty in the range {@code [-2.0, 2.0]}.
+         * Positive values penalize new tokens based on whether they appear in the text so far.
+         *
+         * @param presencePenalty the presence penalty
+         * @return {@code this}
+         */
         public Builder presencePenalty(Double presencePenalty) {
             this.presencePenalty = presencePenalty;
             return this;
         }
 
+        /**
+         * Sets the frequency penalty in the range {@code [-2.0, 2.0]}.
+         * Positive values penalize new tokens based on their existing frequency in the text.
+         *
+         * @param frequencyPenalty the frequency penalty
+         * @return {@code this}
+         */
         public Builder frequencyPenalty(Double frequencyPenalty) {
             this.frequencyPenalty = frequencyPenalty;
             return this;
         }
 
+        /**
+         * Sets the logit bias map to adjust the likelihood of specific tokens being generated.
+         * Token IDs map to bias values in the range {@code [-100, 100]}.
+         *
+         * @param logitBias the logit bias map
+         * @return {@code this}
+         */
         public Builder logitBias(Map<String, Integer> logitBias) {
             this.logitBias = logitBias;
             return this;
         }
 
+        /**
+         * Sets the response format, e.g. {@code "json_object"} to enable JSON mode.
+         *
+         * @param responseFormat the response format
+         * @return {@code this}
+         */
         public Builder responseFormat(String responseFormat) {
             this.responseFormat = responseFormat;
             return this;
         }
 
+        /**
+         * When {@code true}, enforces strict JSON schema validation for structured output responses.
+         *
+         * @param strictJsonSchema whether to enforce strict JSON schema
+         * @return {@code this}
+         */
         public Builder strictJsonSchema(Boolean strictJsonSchema) {
             this.strictJsonSchema = strictJsonSchema;
             return this;
         }
 
+        /**
+         * Sets the random seed for deterministic sampling.
+         * Using the same seed and parameters should produce the same result.
+         *
+         * @param seed the random seed
+         * @return {@code this}
+         */
         public Builder seed(Integer seed) {
             this.seed = seed;
             return this;
         }
 
+        /**
+         * Sets a unique end-user identifier sent to OpenAI to help monitor and detect abuse.
+         *
+         * @param user the end-user identifier
+         * @return {@code this}
+         */
         public Builder user(String user) {
             this.user = user;
             return this;
         }
 
+        /**
+         * When {@code true}, enforces strict JSON schema validation for tool inputs.
+         *
+         * @param strictTools whether to enforce strict tool schemas
+         * @return {@code this}
+         */
         public Builder strictTools(Boolean strictTools) {
             this.strictTools = strictTools;
             return this;
         }
 
+        /**
+         * When {@code true}, allows the model to call multiple tools in parallel within a single turn.
+         *
+         * @param parallelToolCalls whether to allow parallel tool calls
+         * @return {@code this}
+         */
         public Builder parallelToolCalls(Boolean parallelToolCalls) {
             this.parallelToolCalls = parallelToolCalls;
             return this;
         }
 
+        /**
+         * When {@code true}, stores the completion output in OpenAI for model distillation or evals.
+         *
+         * @param store whether to store the completion
+         * @return {@code this}
+         */
         public Builder store(Boolean store) {
             this.store = store;
             return this;
         }
 
+        /**
+         * Sets developer-defined metadata key-value pairs attached to each stored completion.
+         *
+         * @param metadata the metadata map
+         * @return {@code this}
+         */
         public Builder metadata(Map<String, String> metadata) {
             this.metadata = metadata;
             return this;
         }
 
+        /**
+         * Sets the latency tier for processing the request, e.g. {@code "auto"} or {@code "default"}.
+         *
+         * @param serviceTier the service tier
+         * @return {@code this}
+         */
         public Builder serviceTier(String serviceTier) {
             this.serviceTier = serviceTier;
             return this;
         }
 
+        /**
+         * Sets the HTTP request timeout.
+         *
+         * @param timeout the request timeout
+         * @return {@code this}
+         */
         public Builder timeout(Duration timeout) {
             this.timeout = timeout;
             return this;
         }
 
+        /**
+         * Sets the maximum number of retries on transient errors.
+         *
+         * @param maxRetries the maximum number of retries
+         * @return {@code this}
+         */
         public Builder maxRetries(Integer maxRetries) {
             this.maxRetries = maxRetries;
             return this;
         }
 
+        /**
+         * Sets the network proxy used for HTTP connections.
+         *
+         * @param proxy the network proxy
+         * @return {@code this}
+         */
         public Builder proxy(Proxy proxy) {
             this.proxy = proxy;
             return this;
         }
 
+        /**
+         * Sets a custom {@link TokenCountEstimator} for counting tokens in requests.
+         *
+         * @param tokenCountEstimator the token count estimator
+         * @return {@code this}
+         */
         public Builder tokenCountEstimator(TokenCountEstimator tokenCountEstimator) {
             this.tokenCountEstimator = tokenCountEstimator;
             return this;
         }
 
+        /**
+         * Sets additional HTTP headers sent with every request.
+         *
+         * @param customHeaders the custom headers map
+         * @return {@code this}
+         */
         public Builder customHeaders(Map<String, String> customHeaders) {
             this.customHeaders = customHeaders;
             return this;
         }
 
+        /**
+         * Sets the list of {@link ChatModelListener}s for observability and metrics hooks.
+         *
+         * @param listeners the chat model listeners
+         * @return {@code this}
+         */
         public Builder listeners(List<ChatModelListener> listeners) {
             this.listeners = listeners;
             return this;
         }
 
+        /**
+         * Declares the set of {@link Capability} values this model instance supports (e.g. vision).
+         *
+         * @param capabilities the supported capabilities
+         * @return {@code this}
+         */
         public Builder supportedCapabilities(Set<Capability> capabilities) {
             this.capabilities = capabilities;
             return this;

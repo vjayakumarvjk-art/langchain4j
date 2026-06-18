@@ -157,16 +157,34 @@ public class OpenAiOfficialEmbeddingModel extends DimensionAwareEmbeddingModel {
         private Proxy proxy;
         private Map<String, String> customHeaders;
 
+        /**
+         * Sets the base URL of the OpenAI-compatible API. Defaults to {@code https://api.openai.com/v1}.
+         *
+         * @param baseUrl the base URL
+         * @return {@code this}
+         */
         public Builder baseUrl(String baseUrl) {
             this.baseUrl = baseUrl;
             return this;
         }
 
+        /**
+         * Sets the OpenAI API key used to authenticate requests.
+         *
+         * @param apiKey the API key
+         * @return {@code this}
+         */
         public Builder apiKey(String apiKey) {
             this.apiKey = apiKey;
             return this;
         }
 
+        /**
+         * Sets the {@link Credential} used to authenticate requests (alternative to {@link #apiKey(String)}).
+         *
+         * @param credential the credential
+         * @return {@code this}
+         */
         public Builder credential(Credential credential) {
             this.credential = credential;
             return this;
@@ -181,16 +199,34 @@ public class OpenAiOfficialEmbeddingModel extends DimensionAwareEmbeddingModel {
             return this;
         }
 
+        /**
+         * Sets the Microsoft Foundry deployment name used when connecting to Azure OpenAI or Microsoft Foundry.
+         *
+         * @param microsoftFoundryDeploymentName the deployment name
+         * @return {@code this}
+         */
         public Builder microsoftFoundryDeploymentName(String microsoftFoundryDeploymentName) {
             this.microsoftFoundryDeploymentName = microsoftFoundryDeploymentName;
             return this;
         }
 
+        /**
+         * Sets the Azure OpenAI service API version when connecting to Azure OpenAI.
+         *
+         * @param azureOpenAIServiceVersion the Azure OpenAI service version
+         * @return {@code this}
+         */
         public Builder azureOpenAIServiceVersion(AzureOpenAIServiceVersion azureOpenAIServiceVersion) {
             this.azureOpenAIServiceVersion = azureOpenAIServiceVersion;
             return this;
         }
 
+        /**
+         * Sets the OpenAI organization ID sent with each request.
+         *
+         * @param organizationId the organization ID
+         * @return {@code this}
+         */
         public Builder organizationId(String organizationId) {
             this.organizationId = organizationId;
             return this;
@@ -205,61 +241,134 @@ public class OpenAiOfficialEmbeddingModel extends DimensionAwareEmbeddingModel {
             return this;
         }
 
+        /**
+         * Configures the client to use Microsoft Foundry as the API provider.
+         *
+         * @param isMicrosoftFoundry {@code true} to use Microsoft Foundry
+         * @return {@code this}
+         */
         public Builder isMicrosoftFoundry(boolean isMicrosoftFoundry) {
             this.isMicrosoftFoundry = isMicrosoftFoundry;
             return this;
         }
 
+        /**
+         * Configures the client to use GitHub Models as the API provider.
+         *
+         * @param isGitHubModels {@code true} to use GitHub Models
+         * @return {@code this}
+         */
         public Builder isGitHubModels(boolean isGitHubModels) {
             this.isGitHubModels = isGitHubModels;
             return this;
         }
 
+        /**
+         * Sets a pre-configured {@link OpenAIClient} to use directly, bypassing all other connection settings.
+         *
+         * @param openAIClient the pre-configured client
+         * @return {@code this}
+         */
         public Builder openAIClient(OpenAIClient openAIClient) {
             this.openAIClient = openAIClient;
             return this;
         }
 
+        /**
+         * Sets the model name, e.g. {@code "text-embedding-3-small"}.
+         *
+         * @param modelName the model name
+         * @return {@code this}
+         */
         public Builder modelName(String modelName) {
             this.modelName = modelName;
             return this;
         }
 
+        /**
+         * Sets the model name using an {@link EmbeddingModel} enum constant.
+         *
+         * @param modelName the model name enum value
+         * @return {@code this}
+         */
         public Builder modelName(EmbeddingModel modelName) {
             this.modelName = modelName.toString();
             return this;
         }
 
+        /**
+         * Sets the number of dimensions for the output embedding vectors.
+         * Only supported by {@code text-embedding-3} and later models.
+         *
+         * @param dimensions the number of output dimensions
+         * @return {@code this}
+         */
         public Builder dimensions(Integer dimensions) {
             this.dimensions = dimensions;
             return this;
         }
 
+        /**
+         * Sets a unique end-user identifier sent to OpenAI to help monitor and detect abuse.
+         *
+         * @param user the end-user identifier
+         * @return {@code this}
+         */
         public Builder user(String user) {
             this.user = user;
             return this;
         }
 
+        /**
+         * Sets the maximum number of text segments sent in a single embedding request. Defaults to {@code 2048}.
+         *
+         * @param maxSegmentsPerBatch the maximum batch size
+         * @return {@code this}
+         */
         public Builder maxSegmentsPerBatch(Integer maxSegmentsPerBatch) {
             this.maxSegmentsPerBatch = maxSegmentsPerBatch;
             return this;
         }
 
+        /**
+         * Sets the HTTP request timeout.
+         *
+         * @param timeout the request timeout
+         * @return {@code this}
+         */
         public Builder timeout(Duration timeout) {
             this.timeout = timeout;
             return this;
         }
 
+        /**
+         * Sets the maximum number of retries on transient errors.
+         *
+         * @param maxRetries the maximum number of retries
+         * @return {@code this}
+         */
         public Builder maxRetries(Integer maxRetries) {
             this.maxRetries = maxRetries;
             return this;
         }
 
+        /**
+         * Sets the network proxy used for HTTP connections.
+         *
+         * @param proxy the network proxy
+         * @return {@code this}
+         */
         public Builder proxy(Proxy proxy) {
             this.proxy = proxy;
             return this;
         }
 
+        /**
+         * Sets additional HTTP headers sent with every request.
+         *
+         * @param customHeaders the custom headers map
+         * @return {@code this}
+         */
         public Builder customHeaders(Map<String, String> customHeaders) {
             this.customHeaders = customHeaders;
             return this;
